@@ -235,7 +235,6 @@ DEPENDENCIES
   mongoid
   mongoid-rspec
   mongoid_taggable
-  moped
   pry
   quiet_assets
   rails
