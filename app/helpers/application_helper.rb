@@ -15,8 +15,4 @@ module ApplicationHelper
   def is? controller_name
     "active" if params[:controller] == "#{controller_name}"
   end
-
-  def display_date date
-    date.strftime("%d/%m/%Y : %H:%M")
-  end
 end

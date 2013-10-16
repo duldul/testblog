@@ -10,11 +10,11 @@ class Post
   validates_presence_of :body, :title
 
   belongs_to :user
+  has_many :comments
 
   default_scope ne(archived: true)
 
   def archive!
     update_attribute :archived, true
   end
-
 end
