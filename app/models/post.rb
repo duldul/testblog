@@ -26,6 +26,6 @@ class Post
       else 0
     end
 
-    self.comments.count > 3 ? rating+1 : rating
+    self.comments.count >= 3 ? rating+1 : rating
   end
 end
