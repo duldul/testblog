@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @comments = current_user.owner?(post) ? post.comments.unscoped.all : post.comments
+    set_comments
   end
 
   def mark_archived
@@ -44,6 +44,12 @@ class PostsController < ApplicationController
   end
 
   def comments
-    @comments = current_user.owner?(post) ? post.comments.unscoped.all : post.comments
+    set_comments
+  end
+
+  private
+
+  def set_comments
+    @comments = current_user.owner?(post) ? post.comments : post.comments.not_abusive
   end
 end
