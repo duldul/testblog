@@ -1,5 +1,5 @@
 %blockquote.comment
 	%p
 		= comment.body
-	= content_tag :small, comment.user.nickname, class: 'author'
+	= content_tag :small, comment.user.to_s, class: 'author'
 	
