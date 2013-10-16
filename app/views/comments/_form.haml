@@ -1,5 +1,4 @@
 .comment-form
 	= simple_form_for [post, comment], html: { class: "form-horizontal" }, remote: true do |f|
-		= f.input :author
 		= f.input :body, as: :text, input_html: { cols: 50, rows: 3 }
 		= f.button :submit
