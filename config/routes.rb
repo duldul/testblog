@@ -9,6 +9,7 @@ Easyblog::Application.routes.draw do
     resources :comments, :only => [:create, :destroy]
     member do
       post :mark_archived
+      get :comments
     end
   end
 end
