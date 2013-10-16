@@ -3,10 +3,6 @@
     = post.title
     %small
       = post.friendly_date
-  = link_to "edit", edit_post_path(post), class: 'post__button--edit'
 
   .post__comments
-    %h3
-      Komentarze
-    = render partial: 'comments/form', locals: { post: post, comment: Comment.new }
     = render partial: 'comments/comment', collection: @comments, as: :comment
