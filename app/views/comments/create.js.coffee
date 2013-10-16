@@ -1,1 +1,1 @@
-$('<%= escape_javascript(render partial: "comments/comment", locals: { comment: @comment }, layout: false)%>').hide().insertAfter($(".comment-form")).show('slow');
+$('<%= escape_javascript(render partial: "comments/comment", locals: { comment: @comment, post: @post }, layout: false)%>').hide().insertAfter($(".comment-form")).show('slow');

@@ -6,7 +6,9 @@ Easyblog::Application.routes.draw do
   devise_for :users
   resources :users
   resources :posts do
-    resources :comments, :only => [:create, :destroy]
+    resources :comments, :only => [:create] do
+      post :mark_as_not_abusive, :on => :member
+    end
     member do
       post :mark_archived
       get :comments

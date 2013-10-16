@@ -7,7 +7,6 @@ class CommentsController < ApplicationController
 		@comment.user = current_user
 
 	    respond_to do |format|
-	    	
 	    	if @comment.save
 	    		format.html { redirect_to @post, notice: "Thanks for your comment!" }
 			  	format.js { render status: :created }
@@ -16,5 +15,18 @@ class CommentsController < ApplicationController
 			  	format.js { render js: "alert('Error saving comment');"}
 			end
 	  	end 
+	end
+
+	def mark_as_not_abusive
+		@post = Post.find(params[:post_id])
+		@comment = Comment.find(params[:id])
+
+		respond_to do |format|
+			if current_user.owner?(@post) && @comment.mark_as_not_abusive!
+				format.html { redirect_to @post, notice: "Comment has been marked as not abusive"}
+			else
+				format.html { redirect_to @post, flash: { error: "Error marking comment"}}
+			end
+		end
 	end
 end

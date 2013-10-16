@@ -1,5 +1,6 @@
-%blockquote.comment
+%blockquote.comment{:class => ("abusive" if comment.abusive)}
 	%p
 		= comment.body
 	= content_tag :small, comment.user.to_s, class: 'author'
+	= link_to "Nie obraźliwy", mark_as_not_abusive_post_comment_path(post, comment), method: post if comment.abusive
 	

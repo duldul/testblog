@@ -1,18 +1,22 @@
 class Comment
 	include Mongoid::Document
-  	include Mongoid::Timestamps
+	include Mongoid::Timestamps
 
-	field :body, type: String
-  	field :abusive, type: Boolean, default: false
+  field :body, type: String
+	field :abusive, type: Boolean, default: false
 
-  	validates_presence_of :body
+	validates_presence_of :body
 
-  	belongs_to :post
-  	belongs_to :user
+	belongs_to :post
+	belongs_to :user
 
-  	default_scope where(abusive: false)
+	scope :not_abusive, lambda { where(abusive: false) }
 
 	def votes
 		up_votes - down_votes
 	end
+
+  def mark_as_not_abusive!
+    update_attribute :abusive, false
+  end
 end
