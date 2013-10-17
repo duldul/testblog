@@ -9,14 +9,14 @@ class Comment
 
 	belongs_to :post
 	belongs_to :user
+  has_many :votes
 
 	scope :not_abusive, lambda { where(abusive: false) }
 
-	def votes
-		up_votes - down_votes
-	end
-
   def mark_as_not_abusive!
     update_attribute :abusive, false
+  end
+
+  def abuse_check
   end
 end

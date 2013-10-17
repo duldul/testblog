@@ -17,6 +17,17 @@ class CommentsController < ApplicationController
 	  	end 
 	end
 
+	def vote_up
+		@post = Post.find(params[:post_id])
+		@vote = Vote.create()
+		redirect_to @post
+	end
+
+	def vote_down
+		@post = Post.find(params[:post_id])
+		redirect_to @post
+	end
+
 	def mark_as_not_abusive
 		@post = Post.find(params[:post_id])
 		@comment = Comment.find(params[:id])

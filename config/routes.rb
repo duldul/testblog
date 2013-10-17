@@ -7,7 +7,11 @@ Easyblog::Application.routes.draw do
   resources :users
   resources :posts do
     resources :comments, :only => [:create] do
-      post :mark_as_not_abusive, :on => :member
+      member do
+        post :vote_up
+        post :vote_down
+        post :mark_as_not_abusive
+      end
     end
     member do
       post :mark_archived

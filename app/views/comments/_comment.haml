@@ -1,6 +1,10 @@
 %blockquote.comment{:class => ("abusive" if comment.abusive)}
+	.votes
+		= link_to "+", vote_up_post_comment_path(post, comment), remote: true, method: "post"
+		= link_to "-", vote_down_post_comment_path(post, comment), remote: true, method: "post"
 	%p
 		= comment.body
 	= content_tag :small, comment.user.to_s, class: 'author'
-	= link_to "Nie obraźliwy", mark_as_not_abusive_post_comment_path(post, comment), method: post if comment.abusive
+	= link_to "Nie obraźliwy", mark_as_not_abusive_post_comment_path(post, comment), method: "post" if comment.abusive
+
 	
