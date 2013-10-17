@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
 	before_filter :authenticate_user!
+	before_filter :build_vote, only: [:vote_up, :vote_down]
 	
 	def create
 		@post = Post.find(params[:post_id])
@@ -18,14 +19,23 @@ class CommentsController < ApplicationController
 	end
 
 	def vote_up
-		@post = Post.find(params[:post_id])
-		@vote = Vote.create()
-		redirect_to @post
+		@vote.value = 1
+
+		if @vote.save
+			redirect_to @post, notice: "Comment has been voted"
+		else
+			redirect_to @post, flash: { error: "Error voting"}
+		end
 	end
 
 	def vote_down
-		@post = Post.find(params[:post_id])
-		redirect_to @post
+		@vote.value = -1
+		
+		if @vote.save
+			redirect_to @post, notice: "Comment has been voted"
+		else
+			redirect_to @post, flash: { error: "Error voting"}
+		end
 	end
 
 	def mark_as_not_abusive
@@ -39,5 +49,12 @@ class CommentsController < ApplicationController
 				format.html { redirect_to @post, flash: { error: "Error marking comment"}}
 			end
 		end
+	end
+
+	def build_vote
+		@post = Post.find(params[:post_id])
+		@comment = Comment.find(params[:id])
+		@vote = @comment.votes.create(params)
+		@vote.user = current_user
 	end
 end
