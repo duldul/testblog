@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
 
 	def vote_down
 		@vote.value = -1
-		
+
 		if @vote.save
 			redirect_to @post, notice: "Comment has been voted"
 		else
@@ -54,7 +54,7 @@ class CommentsController < ApplicationController
 	def build_vote
 		@post = Post.find(params[:post_id])
 		@comment = Comment.find(params[:id])
-		@vote = @comment.votes.create(params)
+		@vote = @comment.votes.build(params)
 		@vote.user = current_user
 	end
 end
