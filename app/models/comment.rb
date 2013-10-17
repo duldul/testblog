@@ -14,18 +14,19 @@ class Comment
   	default_scope order_by(created_at: 'DESC')
 	scope :not_abusive, lambda { where(abusive: false) }
 
-  def mark_as_not_abusive!
-    update_attribute :abusive, false
-  end
+	def mark_as_abusive!
+		update_attribute :abusive, true
+	end
 
-  def down_votes
-  	self.votes.where(value: -1).count
-  end
+	def mark_as_not_abusive!
+		update_attribute :abusive, false
+	end
 
-  def up_votes
-  	self.votes.where(value: 1).count
-  end
+	def down_votes
+		self.votes.where(value: -1).count
+	end
 
-  def abuse_check
-  end
+	def up_votes
+		self.votes.where(value: 1).count
+	end
 end
